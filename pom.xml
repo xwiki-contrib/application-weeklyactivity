@@ -32,16 +32,47 @@
   <version>1.0-SNAPSHOT</version>
   <name>Weekly Activity Application</name>
   <packaging>xar</packaging>
-  <description>An applicaiton which allows you to manage easily your weekly work</description>
+  <description>Manage your weekly work by logging your activities</description>
   <scm>
     <connection>scm:git:git://github.com/xwiki-contrib/application-weeklyactivity.git</connection>
     <developerConnection>scm:git:git@github.com:xwiki-contrib/application-weeklyactivity.git</developerConnection>
     <url>https://github.com/xwiki-contrib/application-weeklyactivity</url>
   </scm>
+  <developers>
+   <developer>
+     <id>42aroger</id>
+     <name>Antoine Roger</name>
+   </developer>
+   <developer>
+     <id>xwikiyann</id>
+     <name>Yann Flory</name>
+   </developer>
+  </developers>
   <properties>
+    <platform.version>${commons.version}</platform.version>
     <!-- Don't run CLIRR here since there's no Java code. -->
     <xwiki.clirr.skip>true</xwiki.clirr.skip>
   </properties>
+  <dependencies>
+    <dependency>
+      <groupId>org.xwiki.platform</groupId>
+      <artifactId>xwiki-platform-rendering-macro-velocity</artifactId>
+      <version>${platform.version}</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.xwiki.platform</groupId>
+      <artifactId>xwiki-platform-rendering-macro-include</artifactId>
+      <version>${platform.version}</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.xwiki.rendering</groupId>
+      <artifactId>xwiki-rendering-macro-html</artifactId>
+      <version>${platform.version}</version>
+      <scope>runtime</scope>
+    </dependency>
+  </dependencies>
   <build>
     <!-- Needed to add support for the XAR packaging -->
     <extensions>

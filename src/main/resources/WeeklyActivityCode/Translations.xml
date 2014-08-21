@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-->
+
+<xwikidoc>
+  <web>WeeklyActivityCode</web>
+  <name>Translations</name>
+  <language/>
+  <defaultLanguage/>
+  <translation>0</translation>
+  <parent>WebHome</parent>
+  <creator>xwiki:XWiki.Admin</creator>
+  <author>xwiki:XWiki.Admin</author>
+  <customClass/>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <creationDate>1408609535000</creationDate>
+  <date>1408625061000</date>
+  <contentUpdateDate>1408625061000</contentUpdateDate>
+  <version>1.1</version>
+  <title/>
+  <defaultTemplate/>
+  <validationScript/>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>xwiki/2.0</syntaxId>
+  <hidden>true</hidden>
+  <object>
+    <class>
+      <name>XWiki.TranslationDocumentClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <scope>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>scope</name>
+        <number>1</number>
+        <prettyName>Scope</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators> ,|</separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>GLOBAL|WIKI|USER|ON_DEMAND</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </scope>
+    </class>
+    <name>WeeklyActivityCode.Translations</name>
+    <number>0</number>
+    <className>XWiki.TranslationDocumentClass</className>
+    <guid>99eedae5-88c3-419c-a315-fc7badcc125b</guid>
+    <property>
+      <scope>WIKI</scope>
+    </property>
+  </object>
+  <content>## Creation form
+weeklyActivity.create.startDate.label=Next start date
+weeklyActivity.create.startDate.hint=Start date of the next activity week
+weeklyActivity.create.week=Week
+## Home page livetable
+weeklyActivity.home.livetabledoc.title=Title
+weeklyActivity.home.livetablestartDate=Start date (filter by yyyy-MM-dd)
+weeklyActivity.home.livetabledoc.author=Author
+weeklyActivity.home.livetableemptyvalue=
+## Activity page
+weeklyActivity.sheet.title=Weekly activity {0} - {1}
+weeklyActivity.sheet.startDate=Start date
+weeklyActivity.sheet.endDate=End date
+weeklyActivity.sheet.plannedActivity.title=Planned activity
+weeklyActivity.sheet.plannedActivity.resume.title=Planned activity resume
+weeklyActivity.sheet.doneActivity.title=Done activity
+weeklyActivity.sheet.doneActivity.stats.title=Done activity statistics
+weeklyActivity.sheet.workloadActivity.title=Estimated workload remaining
+weeklyActivity.livetable.emptyvalue=-
+weeklyActivity.livetable.user=User (filter by username)
+weeklyActivity.livetable.team=Team
+weeklyActivity.livetable.project=Project (filter by name)
+weeklyActivity.livetable.details=Details
+weeklyActivity.livetable.days=Days
+weeklyActivity.livetable.days2=Days
+weeklyActivity.livetable.priority=Priority
+weeklyActivity.livetable.hours=Hours
+weeklyActivity.livetable._actions=Actions
+weeklyActivity.livetable.plannedActivity.team.projectteam=Project
+weeklyActivity.livetable.plannedActivity.team.hrteam=HR
+weeklyActivity.livetable.plannedActivity.team.researchteam=Research 
+weeklyActivity.livetable.plannedActivity.team.platformteam=Platform
+weeklyActivity.livetable.plannedActivity.team.supportteam=Support
+weeklyActivity.livetable.plannedActivity.team.margetingteam=Marketing
+weeklyActivity.livetable.plannedActivity.team.productteam=Product
+weeklyActivity.livetable.plannedActivity.team.devteam=Dev
+weeklyActivity.livetable.doneDays={0,choice,1#Monday|2#Tuesday|3#Wednesday|4#Thursday|5#Friday|6#Saturday|7#Sunday}
+weeklyActivity.sheet.add-done-activity=Add done activity
+weeklyActivity.sheet.add-planned-activity=Add planned activity
+weeklyActivity.sheet.addActivity.confirm=Add
+weeklyActivity.sheet.addActivity.cancel=Cancel
+weeklyActivity.sheet.addActivity.inProgress=Adding activity
+weeklyActivity.sheet.addActivity.done=Done
+weeklyActivity.sheet.addActivity.failed=Failed
+weeklyActivity.sheet.hours.label=Hours
+weeklyActivity.sheet.tabs.planned=Planned
+weeklyActivity.sheet.tabs.done=Done
+weeklyActivity.sheet.tabs.workload=Workload
+weeklyActivity.sheet.add_type.planned=Add planned activity
+weeklyActivity.sheet.add_type.done=Add done activity
+weeklyActivity.sheet.delete.object=Delete this object
+weeklyActivity.sheet.user=User
+weeklyActivity.sheet.days=Day
+weeklyActivity.sheet.priority=Priority
+weeklyActivity.sheet.details=Details
+weeklyActivity.sheet.salesOrder=Sales Order
+weeklyActivity.sheet.userType=User Type
+weeklyActivity.sheet.satisfaction=Satisfaction
+weeklyActivity.sheet.jiraIssues=Jira Issues
+weeklyActivity.sheet.hours_1=Mon
+weeklyActivity.sheet.hours_2=Tue
+weeklyActivity.sheet.hours_3=Wed
+weeklyActivity.sheet.hours_4=Thu
+weeklyActivity.sheet.hours_5=Fri
+weeklyActivity.sheet.hours_6=Sat
+weeklyActivity.sheet.hours_7=Sun
+## Workload
+weeklyActivity.sheet.project=Project
+weeklyActivity.sheet.workload=Remaining workload
+## Weekly Activity Home Page
+weeklyActivity.sheet.datePicker.project=Project
+weeklyActivity.sheet.datePicker.from=Date start *
+weeklyActivity.sheet.datePicker.to=Date end *
+weeklyActivity.sheet.datePicker.submit=Filter
+##Update
+weeklyActivity.sheet.installProject=Please install "Project Management Application - Stats module"
+weeklyActivity.sheet.updatedone.button=Update done from planned activity
+weeklyActivity.sheet.editdone.button=Edit done activity
+weeklyActivity.sheet.editplanned.button=Edit planned activity
+weeklyActivity.sheet_show_stats=Show satisfactions statistics
+##Satisfaction Stats
+weeklyActivity.sheet_satisfaction_result=Satisfaction results
+weeklyActivity.sheet_total_vote=Total votes of project
+weeklyActivity.sheet_select_project=Please select your project
+weeklyActivity.sheet_submit_button=Submit
+weeklyActivity.sheet.confirm.button=Warning: this action will delete any existing data in done activity for the current week. Do you want to continue?</content>
+</xwikidoc>

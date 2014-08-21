@@ -1,0 +1,776 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-->
+
+<xwikidoc>
+  <web>WeeklyActivityCode</web>
+  <name>ActivitySheet</name>
+  <language/>
+  <defaultLanguage/>
+  <translation>0</translation>
+  <parent>WebHome</parent>
+  <creator>xwiki:XWiki.Admin</creator>
+  <author>xwiki:XWiki.Admin</author>
+  <customClass/>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <creationDate>1408609535000</creationDate>
+  <date>1408609535000</date>
+  <contentUpdateDate>1408609535000</contentUpdateDate>
+  <version>1.1</version>
+  <title/>
+  <defaultTemplate/>
+  <validationScript/>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>xwiki/2.1</syntaxId>
+  <hidden>true</hidden>
+  <object>
+    <class>
+      <name>XWiki.JavaScriptExtension</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <cache>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>cache</name>
+        <number>5</number>
+        <prettyName>Caching policy</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators> ,|</separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>long|short|default|forbid</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </cache>
+      <code>
+        <disabled>0</disabled>
+        <name>code</name>
+        <number>2</number>
+        <prettyName>Code</prettyName>
+        <rows>20</rows>
+        <size>50</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </code>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+      <parse>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>parse</name>
+        <number>4</number>
+        <prettyName>Parse content</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </parse>
+      <use>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>use</name>
+        <number>3</number>
+        <prettyName>Use this extension</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators> ,|</separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>currentPage|onDemand|always</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </use>
+    </class>
+    <name>WeeklyActivityCode.ActivitySheet</name>
+    <number>0</number>
+    <className>XWiki.JavaScriptExtension</className>
+    <guid>4c5d8488-9a26-479e-aa7a-50fdb2be87b2</guid>
+    <property>
+      <cache>long</cache>
+    </property>
+    <property>
+      <code>(function(){
+
+  // Make sure the XWiki namespace exists.
+  if (typeof XWiki == "undefined") {
+     XWiki = new Object();
+  }//
+
+  // Make sure the XWiki.weeklyActivity namespace exists.
+  if (typeof XWiki.weeklyActivity == "undefined") {
+     XWiki.weeklyActivity = new Object();
+  }//
+
+  var widgets = XWiki.widgets = XWiki.widgets || {};
+
+  /* [Weekly Activity page][Form] Create form handlers
+   */
+  XWiki.weeklyActivity.initCreateFormHandlers = function () {
+
+    var activityTypeList = ['planned', 'done'];
+    if($('activity-tabs')) {
+      $('activity-tabs').select('a').each(function(tab){
+        tab.observe('click', XWiki.weeklyActivity.changeTab.bindAsEventListener(this, tab));
+      });
+    }
+    
+    $$('.activity').each(function(elem){
+      var deleteLink = elem.down('a');
+      if(deleteLink) {
+        deleteLink.observe('click', XWiki.weeklyActivity.deleteObject.bindAsEventListener(this, deleteLink));
+      }
+    });
+
+    $$('.add-activity').each(function(addLink) {
+      addLink.observe('click', XWiki.weeklyActivity.addObject.bindAsEventListener(this, addLink));
+    });
+  }
+
+  /
+
+* [Weekly Activity page][Form] Delete object
+   */
+  XWiki.weeklyActivity.deleteObject = function (event) {
+    event.stop();
+
+    var deleteLink = arguments[1];
+    document.fire("weeklyactivity:actions:save", {"continue" : true, 'link' : deleteLink, 'action' : 'delete'});
+  }
+
+  /
+
+* [Weekly Activity page][Form] Add object
+   */
+  XWiki.weeklyActivity.addObject = function (event) {
+    event.stop();
+
+    var addLink = arguments[1];
+    document.fire("weeklyactivity:actions:save", {"continue" : true, 'link' : addLink, 'action' : 'add'});
+  }
+
+
+  XWiki.weeklyActivity.AjaxSaveAndContinue = Class.create({
+
+    initialize : function() {
+      this.createMessages();
+      this.addListeners();
+    },
+    createMessages : function() {
+      this.savingBox = new XWiki.widgets.Notification("Saving...", "inprogress", {inactive: true});
+      this.savedBox = new XWiki.widgets.Notification("Saved", "done", {inactive: true});
+      this.failedBox = new XWiki.widgets.Notification("Failed to save the document. Reason: &lt;span id=\"ajaxRequestFailureReason\"&gt;&lt;/span&gt;", "error", {inactive: true});
+    },
+    addListeners : function() {
+      document.observe("weeklyactivity:actions:save", this.onSave.bindAsEventListener(this));
+    },
+    onSave : function(event) {
+      // Don't continue if the event has been stopped already
+      if (event.stopped) {
+        return;
+      }
+      if (event.memo["continue"]) {
+        if (typeof (event.memo.originalEvent) != 'undefined') {
+          event.memo.originalEvent.stop();
+        }
+        this.form = $('inline');
+        this.savedBox.hide();
+        this.failedBox.hide();
+        this.savingBox.show();//
+
+        var formData = new Hash(this.form.serialize({hash: true, submit: 'action_saveandcontinue'}));
+        formData.set('minorEdit', '1');
+        if (!Prototype.Browser.Opera) {
+          // Opera can't handle properly 204 responses.
+          formData.set('ajax', 'true');
+        }//
+
+        new Ajax.Request(this.form.action, {
+          method : 'post',
+          parameters : formData.toQueryString(),
+          onSuccess : this.onSaveSuccess.bindAsEventListener(this, event),
+          on1223 : this.onSave1223.bindAsEventListener(this, event),
+          on0 : this.onSave0.bindAsEventListener(this),
+          onFailure : this.onSaveFailure.bind(this)
+        });
+      }
+    },
+    // IE converts 204 status code into 1223...
+    onSave1223 : function(response) {
+      var event = arguments[1];
+      response.request.options.onSuccess(response, event);
+    },
+    // 0 is returned for network failures, except on IE where a strange large number (12031) is returned.
+    onSave0 : function(response) {
+      response.request.options.onFailure(response);
+    },
+    onSaveSuccess : function(response, event) {
+
+      // If there was a 'template' field in the form, disable it to avoid 'This document already exists' errors.
+      if (this.form &amp;&amp; this.form.template) {
+        this.form.template.disabled = true;
+        this.form.template.value = "";
+      }
+      this.savingBox.replace(this.savedBox);
+      // Announce that the document has been saved
+      // TODO: We should send the new version as a memo field
+      document.fire("weeklyactivity:document:saved");//
+
+      if(event.memo.action == 'add') {
+        this.addActivity(event.memo.link);
+      } else if (event.memo.action == 'delete') {
+        this.deleteActivity(event.memo.link);
+      }
+    },
+    onSaveFailure : function(response) {
+      this.savingBox.replace(this.failedBox);
+      if (response.statusText == '' /* No response */ || response.status == 12031 /* In IE */) {
+        $('ajaxRequestFailureReason').update('Server not responding');
+      } else if (response.getHeader('Content-Type').match(/^\s*text\/plain/)) {
+        // Regard the body of plain text responses as custom status messages.
+        $('ajaxRequestFailureReason').update(response.responseText);
+      } else {
+        $('ajaxRequestFailureReason').update(response.statusText);
+      }
+      // Announce that a document save attempt has failed
+      document.fire("weeklyactivity:document:saveFailed", {'response' : response});
+    },
+
+    addActivity : function(addLink) {
+      var addContainer = addLink.up('.activity-tab-content');
+    
+      var className = addLink.down('input').value;
+      var currentDoc = new XWiki.Document();
+      var serviceDoc = new XWiki.Document('AddActivityService', 'WeeklyActivityCode');
+      var addURL = serviceDoc.getURL('view', 'xpage=plain&amp;outputSyntax=plain&amp;action=add&amp;className=' + className + '&amp;docFullName=' + encodeURIComponent(currentDoc.space + '.' + currentDoc.page));
+
+      var addingBox = new XWiki.widgets.Notification("Adding activity...", "inprogress", {inactive: true});
+      var successBox = new XWiki.widgets.Notification("Done adding activity.", "done", {inactive: true});
+      var failedBox = new XWiki.widgets.Notification("Failed to add activity.", "error", {inactive: true});
+
+      successBox.hide();
+      failedBox.hide();
+      addingBox.show();
+
+      var notifBoxes = [addingBox, successBox, failedBox];
+
+      // Ajax request
+      new Ajax.Request(addURL, {
+        method : 'get',
+        onSuccess : this.onAddSuccess.bindAsEventListener(this, addContainer, notifBoxes),
+        on1223 : this.onAddSuccess.bindAsEventListener(this, addContainer, notifBoxes),
+        on0 : this.onFailure.bindAsEventListener(this, notifBoxes),
+        onFailure : this.onFailure.bind(this, notifBoxes)
+      });
+    },//
+
+    deleteActivity : function(deleteLink) {
+      var className = deleteLink.next('input[name=className]').value;
+      var classId = deleteLink.next('input[name=classId]').value;
+
+      var currentDoc = new XWiki.Document();
+      var serviceDoc = new XWiki.Document('AddActivityService', 'WeeklyActivityCode');
+      var deleteURL = serviceDoc.getURL('view', 'xpage=plain&amp;outputSyntax=plain&amp;action=delete&amp;className=' + className + '&amp;classId=' + classId + '&amp;docFullName=' + encodeURIComponent(currentDoc.space + '.' + currentDoc.page));
+
+      var deletingBox = new XWiki.widgets.Notification("Deleting activity...", "inprogress", {inactive: true});
+      var successBox = new XWiki.widgets.Notification("Done removing activity.", "done", {inactive: true});
+      var failedBox = new XWiki.widgets.Notification("Failed to delete activity.", "error", {inactive: true});
+
+      successBox.hide();
+      failedBox.hide();
+      deletingBox.show();
+
+      var notifBoxes = [deletingBox, successBox, failedBox];
+
+      // Ajax request
+      new Ajax.Request(deleteURL, {
+        method : 'get',
+        onSuccess : this.onDeleteSuccess.bindAsEventListener(this, deleteLink, notifBoxes),
+        on1223 : this.onDeleteSuccess.bindAsEventListener(this, deleteLink, notifBoxes),
+        on0 : this.onFailure.bindAsEventListener(this, notifBoxes),
+        onFailure : this.onFailure.bind(this, notifBoxes)
+      })
+    },//
+
+    onAddSuccess : function (response) {
+      var addContainer = arguments[1];
+      var activityContainer = new Element('div', {'class': 'activity'}).update(response.responseText);
+
+      var notifBoxes = arguments[2];
+      var addingBox = notifBoxes[0];
+      var successBox = notifBoxes[1];
+
+      addContainer.select('.activity').last().insert ({
+        after: activityContainer
+      });
+
+      var deleteLink = activityContainer.down('.xobject-action');
+      deleteLink.observe('click', XWiki.weeklyActivity.deleteObject.bindAsEventListener(this, deleteLink));
+
+      addingBox.replace(successBox);
+    },
+
+    onDeleteSuccess : function (event) {
+      var deleteLink = arguments[1];
+      var notifBoxes = arguments[2];
+      var deletingBox = notifBoxes[0];
+      var successBox = notifBoxes[1];
+
+      var deleteObj = deleteLink.up('.activity');
+      deleteObj.parentNode.removeChild(deleteObj);
+
+      deletingBox.replace(successBox);
+    },
+
+    onFailure : function (response) {
+      var notifBoxes = arguments[1];
+      var actionBox = notifBoxes[0];
+      var failureBox = notifBoxes[1];
+
+      actionBox.replace(failureBox);
+    }
+  });
+
+})();
+
+
+
+document.observe("xwiki:dom:loaded", function (event) {
+  XWiki.weeklyActivity.initCreateFormHandlers(event);
+  new XWiki.weeklyActivity.AjaxSaveAndContinue();
+});</code>
+    </property>
+    <property>
+      <name>Weekly Activity scripts</name>
+    </property>
+    <property>
+      <parse>1</parse>
+    </property>
+    <property>
+      <use>onDemand</use>
+    </property>
+  </object>
+  <object>
+    <class>
+      <name>XWiki.StyleSheetExtension</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <cache>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>cache</name>
+        <number>5</number>
+        <prettyName>Caching policy</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators> ,|</separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>long|short|default|forbid</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </cache>
+      <code>
+        <disabled>0</disabled>
+        <name>code</name>
+        <number>2</number>
+        <prettyName>Code</prettyName>
+        <rows>20</rows>
+        <size>50</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </code>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+      <parse>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>parse</name>
+        <number>4</number>
+        <prettyName>Parse content</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </parse>
+      <use>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>use</name>
+        <number>3</number>
+        <prettyName>Use this extension</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators> ,|</separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>currentPage|onDemand|always</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </use>
+    </class>
+    <name>WeeklyActivityCode.ActivitySheet</name>
+    <number>0</number>
+    <className>XWiki.StyleSheetExtension</className>
+    <guid>649885cc-ed0d-4a6f-8529-c21d106ba0a8</guid>
+    <property>
+      <cache>long</cache>
+    </property>
+    <property>
+      <code>#template('colorThemeInit.vm')
+.activity-sheet-title {
+  font-weight: bold;
+  padding: 20px 0 0 5px;
+  text-transform: uppercase;
+}
+td .done-days {
+  clear: both;
+  display: block;
+}
+
+.xdialog-modal-container input[type=text], .xdialog-modal-container textarea, .xdialog-modal-container select {
+  width: 90%;
+}
+
+.xdialog-modal-container .xdialog-box-confirmation .question {
+  background: none;
+  font-variant: none;
+  padding: 4px 0 0 22px;
+}
+.xdialog-modal-container .xdialog-box .buttons {
+  padding-left: 22px;
+}
+
+.xobject-content dt {
+  font-size: 0.8em;
+  font-weight: bold;
+  text-transform: uppercase; 
+  padding-top: 3px; 
+}
+
+.activity-modal-box-title {
+  color: #999;
+  font-weight: bold;
+  margin-top: -2em;
+  padding: 0 2px 10px 0;
+  text-transform: uppercase;
+}
+
+.activity {
+  border : 1px solid #ddd;
+  background-color: #eee;
+  padding : 10px;
+  margin-bottom : 10px;
+}
+
+.activity .xwiki-form-listclass {
+  display : inline;
+}
+
+.activity .suggested {
+  width : 200px;
+}
+
+.activityobj-priority select{
+  width : 200px;
+}
+
+.activity-inner {
+  width: 250px;
+  float: left;
+}
+
+.day-hours {
+  clear: right;
+  display: block;
+  float: left;
+}
+
+.activity-day-hours {
+  float: left;
+  margin-right: 10px;
+}
+
+.activity-day-hours input {
+  width : 40px;
+}
+
+.activityobj-days .xwiki-form-listclass {
+  font-size: 0.8em;
+  margin-right: 10px;
+}
+
+.activity-hours-label {
+  color: #999;
+  font-size: 0.8em;
+  font-weight: bold;
+  padding: 3px 2px 0 2px;
+  text-transform: uppercase;
+}
+
+.xobject-content .activity-day-hours dt {
+  font-weight: normal;
+  text-transform: none;
+}
+
+.activity-day-hours dt.label label {
+  color: #000;
+  font-variant : normal;
+}
+
+.activityobj-jiraIssues input {
+  width: 100%;
+}
+
+.activityobj-hours_6 input, .activityobj-hours_7 input {
+  background-color: #eee;
+}
+
+/* TABS */
+#activity-tabs  {
+  position: relative;
+  width: 100%;
+  height: 1.4em;
+  border-bottom: 1px solid #ddd;
+  margin-top: 1.5em;
+}
+
+.activity-tabs-inner {
+  width : 360px;
+  float : right;
+}
+
+.activity-tab {
+  float: right;
+  margin-right : 20px;
+}
+
+.activity-tab a {
+  padding: 5px;
+  background-color: #eee;
+  border: 1px solid #ddd;
+  padding : 0.4em 0.6em;
+}
+
+.activity-tab.active a {
+  color : #fff;
+  background-color: $theme.buttonPrimaryBackgroundColor;
+}
+
+.allweek {
+  color: #888; 
+  font-style: italic;
+}
+
+.activityobj-details textarea {
+  width : 99%;
+}
+
+.add-activity input.button, .add-activity .buttonwrapper a:visited, .add-activity .buttonwrapper a:link, .add-activity .buttonwrapper a:active {
+    background-color: #4D5860;
+    background-image: none;
+    border: 1px solid #4D5860;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    font: 700 0.8em/140% "Helvetica",sans-serif;
+    margin: 0;
+    padding: 2px 3px;
+    text-transform: uppercase;
+}
+.add-activity .buttonwrapper a:hover {
+    background-color: #FFFFFF;
+}
+.satisfaction_input {
+    position: absolute;
+    margin-top: 115px;
+    margin-left: 45px;
+}
+.satisfaction_div {
+    padding-bottom:15px;
+}
+.float_right {
+    float: right;
+}
+.clear_both {
+  	clear: both;
+}
+editactivitybutton {
+    float: right;
+    margin-top: 10px;
+}
+.inline_img {
+    display: inline-block;
+}
+.satisfactionstats_nbr {
+    margin-top: 15px;
+    margin-left: 43px;
+}</code>
+    </property>
+    <property>
+      <name/>
+    </property>
+    <property>
+      <parse>1</parse>
+    </property>
+    <property>
+      <use>onDemand</use>
+    </property>
+  </object>
+  <content>{{include document="WeeklyActivityCode.Macros"/}}
+
+{{velocity}}
+  #set ($getTabValue = $request.getParameter("tab"))
+  #if($context.action == 'view')
+    #displayCopyDoneActivityFromPlanned()
+    #if ($getTabValue == 'done')
+      #displayEditActivity("done", "view")
+    #else
+      #displayEditActivity("planned", "view")
+    #end
+  #end
+  #if("$!request.updateDone" == '1')
+    #updateDoneActivityFromPlanned()
+  #end
+  #set ($activityClassMap = {
+    'done' : 'WeeklyActivityCode.DoneActivityClass',
+    'planned' : 'WeeklyActivityCode.PlannedActivityClass'
+  })
+  #if("$!request.tab" == 'done')
+    #set($displayDone = true)
+  #else
+    #set($displayPlanned = true)
+  #end
+  #if("$!request.type" != '' &amp;&amp; $activityClassMap.keySet().contains("$!request.type"))
+    #if("$!request.xaction" == 'addActivity')
+      ## ---------------------------------  ##
+      ## Use code from editobject.vm        ##
+      ## ---------------------------------  ##
+      #set ($className = $activityClassMap.get("$!request.type"))
+      #set ($newObj = $doc.newObject($className))
+      #set ($class = $xwiki.getClass($className))
+      #set ($props = $class.getProperties())
+      #foreach ($prop in $props)
+        #if ($velocityCount==1)
+          #set ($firstField = $prop.name)
+          #break
+        #end
+      #end ## foreach prop
+
+      {{html wiki=true clean=false}}
+        &lt;form id="saveActivity" action=""&gt;
+          &lt;input type="hidden" name="form_token" value="$!{services.csrf.getToken()}" /&gt;
+          #displayObject($!request.type $newObj $class $props $firstField)
+        &lt;/form&gt;
+      {{/html}}
+
+    #elseif("$!request.xaction" == 'saveActivity')
+      SAVING ACTIVITY | 
+      ## TO DO
+      ## debug $doc.addObjectFromRequest($activityClassMap.get("$!request.type"))
+      #set($newObject = $doc.newObject($activityClassMap.get("$!request.type")))
+      #set($params = $request.getParameterMap())
+      #foreach($key in $params.keySet())
+        ______________________________
+        $key
+        ______________________________
+        #foreach($value in $params.get($key))
+          $value
+        #end
+      #end
+      ##$doc.save()
+    #end
+  #else
+    $xwiki.ssx.use('WeeklyActivityCode.ActivitySheet')##
+    $xwiki.jsx.use('WeeklyActivityCode.ActivitySheet')##
+    #displayStartEndDate()
+    #if($context.action != 'view')
+      {{html clean="false"}}
+        &lt;input type="hidden" name="form_token" value="$!{services.csrf.getToken()}" /&gt;
+      {{/html}}
+    #end
+    #set ($map = $request.getParameterMap())
+    #set ($stringParameters = "")
+      #foreach ($param in $map.entrySet())
+        #if ($param.key != "tab")
+        #set ($stringParameters = "$stringParameters&amp;$param.key=${param.value.get(0)}")
+      #end
+    #end
+
+    {{html wiki=true}}
+
+      &lt;div id="activity-tabs"&gt;
+        &lt;div class="activity-tabs-inner"&gt;
+          &lt;div class="activity-tab #if($displayDone) active #end" id="activity-tab-two"&gt;
+            [[$msg.get('weeklyActivity.sheet.tabs.done')&gt;&gt;path:$doc.getURL($context.action, "${stringParameters}&amp;tab=done")]]              
+          &lt;/div&gt;
+          &lt;div class="activity-tab #if($displayPlanned) active #end" id="activity-tab-one"&gt;
+            [[$msg.get('weeklyActivity.sheet.tabs.planned')&gt;&gt;path:$doc.getURL($context.action, "${stringParameters}&amp;tab=planned")]]               
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="activity-tabs-content"&gt;
+        &lt;div class="activity-tab-content #if(!$displayPlanned) hidden #end" id="activity-tab-one-content"&gt;
+          #if ($displayPlanned)
+            #if($context.action == 'view')
+              {{plannedActivityResume /}}
+            #end
+            #displayActivity('planned', $context.action)
+          #end
+        &lt;/div&gt;
+        &lt;div class="activity-tab-content #if(!$displayDone) hidden #end" id="activity-tab-two-content"&gt;
+          #if ($displayDone)
+            #displayActivity('done', $context.action)
+          #end
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+    {{/html}}
+  #end
+{{/velocity}}</content>
+</xwikidoc>

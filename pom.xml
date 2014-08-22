@@ -29,7 +29,7 @@
   </parent>
   <groupId>org.xwiki.contrib</groupId>
   <artifactId>application-weeklyactivity</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0</version>
   <name>Weekly Activity Application</name>
   <packaging>xar</packaging>
   <description>Manage your weekly work by logging your activities</description>
@@ -37,6 +37,7 @@
     <connection>scm:git:git://github.com/xwiki-contrib/application-weeklyactivity.git</connection>
     <developerConnection>scm:git:git@github.com:xwiki-contrib/application-weeklyactivity.git</developerConnection>
     <url>https://github.com/xwiki-contrib/application-weeklyactivity</url>
+    <tag>application-weeklyactivity-1.0</tag>
   </scm>
   <developers>
    <developer>

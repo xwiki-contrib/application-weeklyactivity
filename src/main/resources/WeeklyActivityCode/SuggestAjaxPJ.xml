@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-->
+
+<xwikidoc>
+  <web>WeeklyActivityCode</web>
+  <name>SuggestAjaxPJ</name>
+  <language/>
+  <defaultLanguage/>
+  <translation>0</translation>
+  <parent>WeeklyActivityCode.WebHome</parent>
+  <creator>xwiki:XWiki.Admin</creator>
+  <author>xwiki:XWiki.Admin</author>
+  <customClass/>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <creationDate>1409238223000</creationDate>
+  <date>1409143975000</date>
+  <contentUpdateDate>1409143923000</contentUpdateDate>
+  <version>1.1</version>
+  <title/>
+  <defaultTemplate/>
+  <validationScript/>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>xwiki/2.1</syntaxId>
+  <hidden>false</hidden>
+  <content>{{velocity}}
+$response.setContentType("text/xml")
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+#set($input = $request.get("input").toLowerCase())
+#if("$!input" == "")
+  #set($query = "select distinct doc.name, doc.fullName from XWikiDocument doc, BaseObject obj, StringProperty so where obj.name=doc.fullName and obj.className='ProjectsCode.ProjectsCodeClass' and doc.fullName &lt;&gt; 'ProjectsCode.ProjectsCodeTemplate'")
+  #set($results = $services.query.xwql($query).setLimit(10).execute())
+  &lt;results type="1"&gt;
+  #foreach($res in $results)
+    &lt;rs id="" info="$!{escapetool.xml($res.get(1))}"&gt;$!{escapetool.xml($res.get(1))}&lt;/rs&gt;
+  #end
+  &lt;/results&gt;
+#else
+  #set($query = "select distinct doc.name, doc.fullName from XWikiDocument doc, BaseObject obj where obj.name=doc.fullName and obj.className='ProjectsCode.ProjectsCodeClass' and doc.fullName &lt;&gt; 'ProjectsCode.ProjectsCodeTemplate' and lower(doc.name) like '%" + $input + "%'  order by doc.name")
+  #set($query2 = "select distinct project.value from XWikiDocument doc, BaseObject obj, StringProperty project where (obj.className='WeeklyActivityCode.PlannedActivityClass' OR obj.className='WeeklyActivityCode.DoneActivityClass') and doc.fullName &lt;&gt; 'WeeklyActivityCode.ActivityClassTemplate' and obj.name=doc.fullName and project.id.id=obj.id and project.name='project' and lower(project.value) like '%" + $input + "%'")
+  #set($results = $services.query.xwql($query).setLimit(10).execute())
+  #set($results2 = $services.query.xwql($query2).setLimit(10).execute())
+  &lt;results type="1"&gt;
+  #foreach($res in $results)
+    &lt;rs id="" info="$!{escapetool.xml($res.get(1))}"&gt;$!{escapetool.xml($res.get(1))}&lt;/rs&gt;
+  #end
+  #foreach($res2 in $results2)
+    &lt;rs id="" info="$!{escapetool.xml($res2)}"&gt;$!{escapetool.xml($res2)}&lt;/rs&gt;
+  #end
+  &lt;/results&gt;
+#end
+{{/velocity}}</content>
+</xwikidoc>

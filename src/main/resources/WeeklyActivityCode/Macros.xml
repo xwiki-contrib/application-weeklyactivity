@@ -26,14 +26,14 @@
   <language/>
   <defaultLanguage/>
   <translation>0</translation>
-  <parent>WebHome</parent>
+  <parent>WeeklyActivityCode.WebHome</parent>
   <creator>xwiki:XWiki.Admin</creator>
   <author>xwiki:XWiki.Admin</author>
   <customClass/>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
   <creationDate>1408609534000</creationDate>
-  <date>1408630754000</date>
-  <contentUpdateDate>1408630754000</contentUpdateDate>
+  <date>1409143586000</date>
+  <contentUpdateDate>1409143586000</contentUpdateDate>
   <version>1.1</version>
   <title>Macros</title>
   <defaultTemplate/>
@@ -246,6 +246,12 @@
           #foreach ($pCustomValue in $satisfactionCustomDisplay.keySet())
             &lt;label for="xwiki-form-satisfaction-${obj.number}-${pCustomValue}"&gt;&lt;input type="radio" value="${pCustomValue}" name="${escapetool.xml($class.name)}_${obj.number}_satisfaction" id="xwiki-form-satisfaction-${obj.number}-${pCustomValue}" class="satisfaction_input" #if($satisfactionObjValues.contains($pCustomValue)) checked="checked" #end&gt;&lt;img src="$xwiki.getDocument('WeeklyActivity.WebHome').getAttachmentURL("$satisfactionCustomDisplay.get($pCustomValue)")"  height="115px" width="100px"/&gt;&lt;/label&gt;
           #end
+        #elseif($activityClassMap.keySet().contains("$!type") &amp;&amp; "$!prop.name" == 'project')
+          #set($pSuggestName = "${escapetool.xml($class.name)}_${obj.number}_${prop.name}")
+          #set($pSuggestURL = $xwiki.getURL('WeeklyActivityCode.SuggestAjaxPJ', 'view', "xpage=plain&amp;outputSyntax=plain"))
+          #set($pOnFocus = "new ajaxSuggest(this, {script:&amp;quot;${pSuggestURL}&amp;amp;&amp;quot;,varname:&amp;quot;input&amp;quot;})")
+          #set($pValue = $!obj.getProperty('project').value)
+          &lt;input type="text" value="$!pValue" name="${pSuggestName}" id="${pSuggestName}" class="suggested" onfocus="${pOnFocus}" /&gt;
         #elseif($activityClassMap.keySet().contains("$!type") &amp;&amp; "$!prop.name" == 'salesOrder')
           #if($xwiki.exists('ProjectsCode.SalesOrderClass'))
             #set($pSuggestName = "${escapetool.xml($class.name)}_${obj.number}_${prop.name}_suggest")
@@ -259,7 +265,9 @@
           #end
         #elseif($activityClassMap.keySet().contains("$!type") &amp;&amp; "$!prop.name" == 'userType')
           #if($xwiki.exists('ProjectsCode.SalesOrderClass'))
-            $activityDoc.displayEdit($prop, "${escapetool.xml($class.name)}_${obj.number}_", $obj)
+            {{/html}}
+            $activityDoc.display($prop.name, "edit", $obj)
+            {{html clean="false"}}
           #else
             $activityDoc.displayHidden($prop, "${escapetool.xml($class.name)}_${obj.number}_", $obj)
             $services.localization.render('weeklyActivity.sheet.installProject')

@@ -222,7 +222,7 @@
 &lt;option value="" selected="selected"&gt;&lt;/option&gt;
 #if ($type == 'edit')
   #foreach($v in $results)
-    &lt;option value="${v.get(0)}"&gt;${v.get(1)}&lt;/option&gt;
+    &lt;option value="${v.get(0)}" #if($value == $v.get(0))selected="selected"#end>${v.get(1)}&lt;/option>
   #end
 #end
 &lt;/select&gt;

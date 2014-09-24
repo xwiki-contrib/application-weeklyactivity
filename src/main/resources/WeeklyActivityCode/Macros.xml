@@ -1,32 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-->
+
 <xwikidoc>
-<web>WeeklyActivityCode</web>
-<name>Macros</name>
-<language></language>
-<defaultLanguage>en</defaultLanguage>
-<translation>0</translation>
-<parent></parent>
-<creator>XWiki.Admin</creator>
-<author>XWiki.Admin</author>
-<customClass></customClass>
-<contentAuthor>XWiki.Admin</contentAuthor>
-<creationDate>1408609534000</creationDate>
-<date>1411486143000</date>
-<contentUpdateDate>1411486143000</contentUpdateDate>
-<version>17.1</version>
-<title>Macros</title>
-<defaultTemplate></defaultTemplate>
-<validationScript></validationScript>
-<comment></comment>
-<minorEdit>false</minorEdit>
-<syntaxId>xwiki/2.0</syntaxId>
-<hidden>true</hidden><attachment>
-<filename>10.png</filename>
-<filesize>56841</filesize>
-<author>XWiki.Admin</author>
-<date>1411486063000</date>
-<version>1.1</version>
-<comment></comment><content>iVBORw0KGgoAAAANSUhEUgAAAPoAAAEfCAYAAABoEtu4AAAACXBIWXMAAAsTAAALEwEAmpwYAAAK
+  <web>WeeklyActivityCode</web>
+  <name>Macros</name>
+  <language/>
+  <defaultLanguage/>
+  <translation>0</translation>
+  <parent>WeeklyActivityCode.WebHome</parent>
+  <creator>xwiki:XWiki.Admin</creator>
+  <author>xwiki:XWiki.Admin</author>
+  <customClass/>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <creationDate>1408609534000</creationDate>
+  <date>1411486143000</date>
+  <contentUpdateDate>1411486143000</contentUpdateDate>
+  <version>1.1</version>
+  <title>Macros</title>
+  <defaultTemplate/>
+  <validationScript/>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>xwiki/2.0</syntaxId>
+  <hidden>true</hidden>
+  <attachment>
+    <filename>10.png</filename>
+    <filesize>56841</filesize>
+    <author>XWiki.Admin</author>
+    <date>1411486063000</date>
+    <version>1.1</version>
+    <comment/>
+    <content>iVBORw0KGgoAAAANSUhEUgAAAPoAAAEfCAYAAABoEtu4AAAACXBIWXMAAAsTAAALEwEAmpwYAAAK
 T2lDQ1BQaG90b3Nob3AgSUNDIHByb2ZpbGUAAHjanVNnVFPpFj333vRCS4iAlEtvUhUIIFJCi4AU
 kSYqIQkQSoghodkVUcERRUUEG8igiAOOjoCMFVEsDIoK2AfkIaKOg6OIisr74Xuja9a89+bN/rXX
 Pues852zzwfACAyWSDNRNYAMqUIeEeCDx8TG4eQuQIEKJHAAEAizZCFz/SMBAPh+PDwrIsAHvgAB
@@ -1024,13 +1046,16 @@ jjjiAN0RRxxxgO6II444QHfEEUccoDviiAN0RxxxxAG6I4444gDdEUcccYDuiCOOOEB3xBFHHKA7
 I444QHeWwBFHHKA74ogjDtAdccQRB+iOOOKIA3RHHHHEAbojjjjiAN0RRxxxgO6II444QHfEEQfo
 jjjiiAN0RxxxxAG6I4444gDdEUcccYDuiCOOOEB3xBFHHKA74ogjDtAdceT8lP83AEp/ZYg9tpcy
 AAAAAElFTkSuQmCC
-</content></attachment><attachment>
-<filename>2.png</filename>
-<filesize>27526</filesize>
-<author>XWiki.Admin</author>
-<date>1411486062000</date>
-<version>1.1</version>
-<comment></comment><content>iVBORw0KGgoAAAANSUhEUgAAAPoAAAEfCAYAAABoEtu4AAAACXBIWXMAAAsTAAALEwEAmpwYAAAK
+</content>
+  </attachment>
+  <attachment>
+    <filename>2.png</filename>
+    <filesize>27526</filesize>
+    <author>XWiki.Admin</author>
+    <date>1411486062000</date>
+    <version>1.1</version>
+    <comment/>
+    <content>iVBORw0KGgoAAAANSUhEUgAAAPoAAAEfCAYAAABoEtu4AAAACXBIWXMAAAsTAAALEwEAmpwYAAAK
 T2lDQ1BQaG90b3Nob3AgSUNDIHByb2ZpbGUAAHjanVNnVFPpFj333vRCS4iAlEtvUhUIIFJCi4AU
 kSYqIQkQSoghodkVUcERRUUEG8igiAOOjoCMFVEsDIoK2AfkIaKOg6OIisr74Xuja9a89+bN/rXX
 Pues852zzwfACAyWSDNRNYAMqUIeEeCDx8TG4eQuQIEKJHAAEAizZCFz/SMBAPh+PDwrIsAHvgAB
@@ -1513,13 +1538,16 @@ e2c8+eST8Y+zLRYvXtz9+vXrtaznXl5eGQMGDDjJSsn9Qaw5txiMqkT79u1/P3LkyDAACAoK2rd2
 mNAZDAYTOoPBYEJnMBhM6AwGgwmdwWBCZzAYTOgMBoMJncFgMKEzGAwmdAaDwYTOYDCY0BkMBhM6
 g8GEzmAwmNAZDAYTOoPBYEJnMBhM6AwGgwmdwWAwoTMYDCZ0BoMJnZmAwWBCZzAYTOgMBoMJncFg
 MKEzGAwmdAaDwYTOYDCY0BkMBhM6g8GEzmAwahT/HwBLKlMlwhc3MAAAAABJRU5ErkJggg==
-</content></attachment><attachment>
-<filename>5.png</filename>
-<filesize>5739</filesize>
-<author>XWiki.Admin</author>
-<date>1411486062000</date>
-<version>1.1</version>
-<comment></comment><content>iVBORw0KGgoAAAANSUhEUgAAAPoAAAEfCAYAAABoEtu4AAAACXBIWXMAAAsTAAALEwEAmpwYAAAK
+</content>
+  </attachment>
+  <attachment>
+    <filename>5.png</filename>
+    <filesize>5739</filesize>
+    <author>XWiki.Admin</author>
+    <date>1411486062000</date>
+    <version>1.1</version>
+    <comment/>
+    <content>iVBORw0KGgoAAAANSUhEUgAAAPoAAAEfCAYAAABoEtu4AAAACXBIWXMAAAsTAAALEwEAmpwYAAAK
 T2lDQ1BQaG90b3Nob3AgSUNDIHByb2ZpbGUAAHjanVNnVFPpFj333vRCS4iAlEtvUhUIIFJCi4AU
 kSYqIQkQSoghodkVUcERRUUEG8igiAOOjoCMFVEsDIoK2AfkIaKOg6OIisr74Xuja9a89+bN/rXX
 Pues852zzwfACAyWSDNRNYAMqUIeEeCDx8TG4eQuQIEKJHAAEAizZCFz/SMBAPh+PDwrIsAHvgAB
@@ -1620,13 +1648,16 @@ pSr72YMCF8ge5bUg+gNzOdR4ojcuuTQnO9FJDrITneQoIHs3en2IDpI3SJ55zRb/HdHRLSUFyauv
 8KlbfntnomMxBbJVeYXsqjtUdrITHSQnO9FJjvfK3toFOaKTnOy/ZU8SHd3EhiC5Gk/0htN8arPg
 3bI3yT9e4sMp3rWeAkHJRMfkppDmUl11JzlAdJIDRCc5QHSzHEB0AF3XdV0/DINVACQ6AKIDIDoA
 ogMgOgCiAyA6AKIDRAfQDv8OAMaKyasL94/JAAAAAElFTkSuQmCC
-</content></attachment><attachment>
-<filename>6.png</filename>
-<filesize>13003</filesize>
-<author>XWiki.Admin</author>
-<date>1411486062000</date>
-<version>1.1</version>
-<comment></comment><content>iVBORw0KGgoAAAANSUhEUgAAAPoAAAEfCAYAAABoEtu4AAAACXBIWXMAAAsTAAALEwEAmpwYAAAK
+</content>
+  </attachment>
+  <attachment>
+    <filename>6.png</filename>
+    <filesize>13003</filesize>
+    <author>XWiki.Admin</author>
+    <date>1411486062000</date>
+    <version>1.1</version>
+    <comment/>
+    <content>iVBORw0KGgoAAAANSUhEUgAAAPoAAAEfCAYAAABoEtu4AAAACXBIWXMAAAsTAAALEwEAmpwYAAAK
 T2lDQ1BQaG90b3Nob3AgSUNDIHByb2ZpbGUAAHjanVNnVFPpFj333vRCS4iAlEtvUhUIIFJCi4AU
 kSYqIQkQSoghodkVUcERRUUEG8igiAOOjoCMFVEsDIoK2AfkIaKOg6OIisr74Xuja9a89+bN/rXX
 Pues852zzwfACAyWSDNRNYAMqUIeEeCDx8TG4eQuQIEKJHAAEAizZCFz/SMBAPh+PDwrIsAHvgAB
@@ -1855,13 +1886,16 @@ HKgoX+VB3MC15SNHFlpyaLo30eQNfONDODmhobyUHG4ThbS34mD0ZjL5Rzb9gWybnd9QntZjehhd
 mg3+uSaXeA0fqiqO2aUZGL3+Wpwvmdmf0yxHrQ6zw+gy2lT/wIM41OowO4wuj/1x0VP4hr4AUKvL
 JTJjdroiG7whkze1qS6+dQ9qdfms1WW1Zlf0Gr3e/ngLNfWAnDfjpZn/DwBaVf4dhui64AAAAABJ
 RU5ErkJggg==
-</content></attachment><attachment>
-<filename>8.png</filename>
-<filesize>6578</filesize>
-<author>XWiki.Admin</author>
-<date>1411486063000</date>
-<version>1.1</version>
-<comment></comment><content>iVBORw0KGgoAAAANSUhEUgAAAPoAAAEfCAYAAABoEtu4AAAACXBIWXMAAAsTAAALEwEAmpwYAAAK
+</content>
+  </attachment>
+  <attachment>
+    <filename>8.png</filename>
+    <filesize>6578</filesize>
+    <author>XWiki.Admin</author>
+    <date>1411486063000</date>
+    <version>1.1</version>
+    <comment/>
+    <content>iVBORw0KGgoAAAANSUhEUgAAAPoAAAEfCAYAAABoEtu4AAAACXBIWXMAAAsTAAALEwEAmpwYAAAK
 T2lDQ1BQaG90b3Nob3AgSUNDIHByb2ZpbGUAAHjanVNnVFPpFj333vRCS4iAlEtvUhUIIFJCi4AU
 kSYqIQkQSoghodkVUcERRUUEG8igiAOOjoCMFVEsDIoK2AfkIaKOg6OIisr74Xuja9a89+bN/rXX
 Pues852zzwfACAyWSDNRNYAMqUIeEeCDx8TG4eQuQIEKJHAAEAizZCFz/SMBAPh+PDwrIsAHvgAB
@@ -1977,8 +2011,9 @@ QdlOfw6ITv8GgOgAgOj05wCITn8OgOj05wCIDoDoQH8OiE5/Tn8OiE5/DoDoAIDo9OcAiE5/DoDo
 9OcAiA6A6BDQn1O2A6Jn0J9TtgOiA8Cy4OaQ/aBkh3W2ns45RgGA0h0AEB0AEB0AEB0AEB0AEB0A
 EB0AEB0A0QEA0QEA0QEA0QEA0QEA0QEA0QEA0QEQHQAQHQAQHQAQHQAQHQAQHQAQHQAQHQDRASBt
 /j8A6lObbpT9KtcAAAAASUVORK5CYII=
-</content></attachment>
-<content>{{velocity output="false"}}
+</content>
+  </attachment>
+  <content>{{velocity output="false"}}
 
 #set ($activityClassMap = {
   'done' : 'WeeklyActivityCode.DoneActivityClass',
@@ -2270,4 +2305,5 @@ EB0AEB0A0QEA0QEA0QEA0QEA0QEA0QEA0QEA0QEQHQAQHQAQHQAQHQAQHQAQHQAQHQAQHQDRASBt
   #end
 #end
 
-{{/velocity}}</content></xwikidoc>
+{{/velocity}}</content>
+</xwikidoc>

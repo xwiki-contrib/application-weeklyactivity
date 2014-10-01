@@ -1,0 +1,221 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xwikidoc version="1.1">
+  <web>WeeklyActivityCode</web>
+  <name>SatisfactionStats</name>
+  <language/>
+  <defaultLanguage/>
+  <translation>0</translation>
+  <creator>XWiki.Admin</creator>
+  <creationDate>1412156226000</creationDate>
+  <parent>WeeklyActivityCode.WebHome</parent>
+  <author>XWiki.Admin</author>
+  <contentAuthor>XWiki.Admin</contentAuthor>
+  <date>1412157042000</date>
+  <contentUpdateDate>1412156233000</contentUpdateDate>
+  <version>5.1</version>
+  <title/>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>xwiki/2.1</syntaxId>
+  <hidden>true</hidden>
+  <content>{{include document="WeeklyActivityCode.Macros"/}}&#xd;
+&#xd;
+{{velocity}}&#xd;
+## A simple date picker widget.&#xd;
+#set ($discard = $xwiki.ssfx.use('uicomponents/widgets/datepicker/calendarDateSelect.css', true))&#xd;
+#set ($discard = $xwiki.jsfx.use('uicomponents/widgets/datepicker/calendarDateSelect.js', true))&#xd;
+## Used to parse and serialize the selected date using the date format specified in the XClass.&#xd;
+#set ($discard = $xwiki.jsfx.use('uicomponents/widgets/datepicker/simpleDateFormat.js', true))&#xd;
+## A wrapper over the CalendarDateSelect widget that uses the SimpleDateFormat to parse/serialize the dates.&#xd;
+#set ($discard = $xwiki.ssfx.use('uicomponents/widgets/datepicker/dateTimePicker.css', true))&#xd;
+#set ($discard = $xwiki.jsfx.use('uicomponents/widgets/datepicker/dateTimePicker.js'))&#xd;
+$xwiki.ssx.use('WeeklyActivityCode.ActivitySheet')&#xd;
+&#xd;
+##&#xd;
+## BASIC SATISFACTION PROJECT REQUEST SEND&#xd;
+## ------------------------------------&#xd;
+#if ($!request.get('satisfaction_id') &amp;&amp; "$!request.get('satisfaction_id')" != "")&#xd;
+  #set ($satisfactionId = $!request.get('satisfaction_id'))&#xd;
+  #set ($sql = "select obj.satisfaction, count(obj.satisfaction) from Document doc, doc.object(WeeklyActivityCode.DoneActivityClass) as obj where obj.project = :proj and obj.satisfaction &lt;&gt; '' group by obj.satisfaction ")&#xd;
+  #set ($resultSql = $services.query.xwql($sql).bindValue("proj", $satisfactionId).execute())&#xd;
+  #set ($total = 0)&#xd;
+  #foreach ($item in $resultSql)&#xd;
+    #set ($total = $total + 1)&#xd;
+  #end&#xd;
+&#xd;
+  {{html}}&#xd;
+  &lt;h2>$msg.get('weeklyActivity.sheet_satisfaction_result'):&lt;/h2>&#xd;
+  {{/html}}&#xd;
+&#xd;
+  #foreach($item in $resultSql)&#xd;
+    {{html}}&#xd;
+    &lt;div class="inline_img">&#xd;
+    #set ($value = (100 / $total) * $item.get(1))&#xd;
+    #if ($item.get(0) == 1) &lt;img src="$xwiki.getDocument('WeeklyActivity.WebHome').getAttachmentURL("2.png")" class="float_right" height="115px" width="100px"/> &lt;div class="satisfactionstats_nbr">$value%&lt;/div>&#xd;
+    #elseif ($item.get(0) == 2) &lt;img src="$xwiki.getDocument('WeeklyActivity.WebHome').getAttachmentURL("5.png")" class="float_right" height="115px" width="100px"/> &lt;div class="satisfactionstats_nbr">$value%&lt;/div>&#xd;
+    #elseif ($item.get(0) == 3) &lt;img src="$xwiki.getDocument('WeeklyActivity.WebHome').getAttachmentURL("6.png")" class="float_right" height="115px" width="100px"/> &lt;div class="satisfactionstats_nbr">$value%&lt;/div>&#xd;
+    #elseif ($item.get(0) == 4) &lt;img src="$xwiki.getDocument('WeeklyActivity.WebHome').getAttachmentURL("8.png")" class="float_right" height="115px" width="100px"/> &lt;div class="satisfactionstats_nbr">$value%&lt;/div&gt;&#xd;
+    #elseif ($item.get(0) == 5) &lt;img src="$xwiki.getDocument('WeeklyActivity.WebHome').getAttachmentURL("10.png")" class="float_right" height="115px" width="100px"/> &lt;div class="satisfactionstats_nbr">$value%&lt;/div>&#xd;
+    #end&#xd;
+    &lt;/div>&#xd;
+    {{/html}}&#xd;
+    &#xd;
+  #end&#xd;
+&#xd;
+    {{html}}&#xd;
+    &lt;h3>$msg.get('weeklyActivity.sheet_total_vote') ($!request.get('satisfaction_id')):&lt;/h3>&#xd;
+    {{/html}}&#xd;
+&#xd;
+    $total#if ($total > 1) votes #else vote #end&#xd;
+&#xd;
+&#xd;
+##&#xd;
+## DATE SATISFACTION PROJECT REQUEST SEND&#xd;
+## -------------------------&#xd;
+#elseif ($!request.get('userInput') &amp;&amp; "$!request.get('userInput')" != "")&#xd;
+  #set ($userinput = $!request.get('userInput'))&#xd;
+  #set ($username = $services.model.resolveDocument($userinput))&#xd;
+  #set ($total = 0)&#xd;
+  #set ($avg = 0)&#xd;
+  ##&#xd;
+  ## REQUEST WITH DATES&#xd;
+  ##&#xd;
+  #if ($!request.get('startdate') &amp;&amp; "$!request.get('startdate')" != "" &amp;&amp; $!request.get('enddate') &amp;&amp; "$!request.get('enddate')" != "")&#xd;
+    #set ($startdate = $!request.get('startdate'))&#xd;
+    #set ($enddate = $!request.get('enddate'))&#xd;
+    #set ($sql = "from doc.object(ProjectsCode.ProjectsCodeClass) as objProject, doc.object(ProjectsCode.SalesOrderClass) as objSales where objSales.startDate >= :startDate and objSales.endDate &lt;= :endDate")&#xd;
+    #set ($resultSql = $services.query.xwql($sql).addFilter("unique").bindValue("startDate", $datetool.toDate('dd/MM/yyyy', $startdate)).bindValue("endDate", $datetool.toDate('dd/MM/yyyy', $enddate)).execute())&#xd;
+  ##&#xd;
+  ## REQUEST WITHOUT DATES&#xd;
+  ##&#xd;
+  #else&#xd;
+    #set ($sql = "from doc.object(ProjectsCode.ProjectsCodeClass) as objProject")&#xd;
+    #set ($resultSql = $services.query.xwql($sql).addFilter("unique").execute())&#xd;
+  #end&#xd;
+&#xd;
+  {{html}}&#xd;
+  &lt;h2>$msg.get('weeklyActivity.sheet_satisfaction_result'):&lt;/h2>&#xd;
+  {{/html}}&#xd;
+&#xd;
+  #if ($!request.get('startdate') &amp;&amp; "$!request.get('startdate')" != "" &amp;&amp; $!request.get('enddate') &amp;&amp; "$!request.get('enddate')" != "")&#xd;
+    (% class="satisfaction_header" %)(((&#xd;
+    $msg.get('weeklyActivity.sheet_satis_user') : **$username.getName()**&#xd;
+&#xd;
+    $msg.get('weeklyActivity.sheet_satis_start_date') : **$startdate**&#xd;
+&#xd;
+    $msg.get('weeklyActivity.sheet_satis_end_date') : **$enddate**&#xd;
+    )))&#xd;
+  #else&#xd;
+    (% class="satisfaction_header" %)(((&#xd;
+    $msg.get('weeklyActivity.sheet_satis_user') : **$username.getName()**&#xd;
+    )))&#xd;
+  #end&#xd;
+  #foreach($item in $resultSql)&#xd;
+  ##&#xd;
+  ## FOREACH&#xd;
+  ##&#xd;
+    #set ($sql = "select obj.satisfaction, count(obj.satisfaction) from Document doc, doc.object(WeeklyActivityCode.DoneActivityClass) as obj where obj.project = :proj and obj.user = :user and obj.satisfaction &lt;&gt; '' group by obj.satisfaction ")&#xd;
+    #set ($resultSql = $services.query.xwql($sql).addFilter("unique").bindValue("proj", $item).bindValue("user", $userinput).execute())&#xd;
+    #foreach($item2 in $resultSql)&#xd;
+      #set ($total = $total + 1)&#xd;
+      #set ($avg = $avg + $numbertool.toNumber($item2.get(0)))&#xd;
+      #set ($md = $services.model.resolveDocument($item))&#xd;
+      (% class="satisfaction_project" %)(((&#xd;
+      == $msg.get('weeklyActivity.sheet_satis_project'): $md.getName() ==&#xd;
+      #if ($item2.get(0) == 1) [[image:WeeklyActivity.WebHome@2.png]]&#xd;
+      #elseif ($item2.get(0) == 2) [[image:WeeklyActivity.WebHome@5.png]]&#xd;
+      #elseif ($item2.get(0) == 3) [[image:WeeklyActivity.WebHome@6.png]]&#xd;
+      #elseif ($item2.get(0) == 4) [[image:WeeklyActivity.WebHome@8.png]]&#xd;
+      #elseif ($item2.get(0) == 5) [[image:WeeklyActivity.WebHome@10.png]]&#xd;
+      #end&#xd;
+      )))&#xd;
+    #end&#xd;
+&#xd;
+  ##&#xd;
+  ## END FOREACH&#xd;
+  ##&#xd;
+  #end&#xd;
+&#xd;
+  {{html}}&#xd;
+  &lt;h2>$msg.get('weeklyActivity.sheet_satisfaction_result_avg'):&lt;/h2>&#xd;
+  {{/html}}&#xd;
+&#xd;
+  #set ($value = $avg / $total)&#xd;
+  #set ($value = $numbertool.integer($value))&#xd;
+  (% class="satisfaction_project" %)(((&#xd;
+      == $msg.get('weeklyActivity.sheet_satisfaction_result_avg_on', [$total]) ==&#xd;
+      #if ($value == 1) [[image:WeeklyActivity.WebHome@2.png]]&#xd;
+      #elseif ($value == 2) [[image:WeeklyActivity.WebHome@5.png]]&#xd;
+      #elseif ($value == 3) [[image:WeeklyActivity.WebHome@6.png]]&#xd;
+      #elseif ($value == 4) [[image:WeeklyActivity.WebHome@8.png]]&#xd;
+      #elseif ($value == 5) [[image:WeeklyActivity.WebHome@10.png]]&#xd;
+      #end&#xd;
+  )))&#xd;
+&#xd;
+##&#xd;
+## SHOW FORM&#xd;
+## -------------------------&#xd;
+#else&#xd;
+  #set($sql = "select distinct obj.project from Document doc, doc.object(WeeklyActivityCode.DoneActivityClass) as obj")&#xd;
+  $!xwiki.jsx.use("WeeklyActivity.SatisfactionStats")&#xd;
+  {{html}}&#xd;
+  &lt;h3>$msg.get('weeklyActivity.sheet_select_project') :&lt;/h3>&#xd;
+  &lt;form action="" method="POST">&#xd;
+  &lt;div>&#xd;
+    &lt;dl>&#xd;
+      &lt;dt>$msg.get('weeklyActivity.sheet_satis_project')&lt;/dt>&#xd;
+        &lt;dd>&#xd;
+          &lt;select name="satisfaction_id">&#xd;
+          #foreach($item in $services.query.xwql($sql).execute())&#xd;
+            #if ($item != "Other")&#xd;
+              &lt;option value="$item">$item&lt;/option>&#xd;
+            #end&#xd;
+          #end&#xd;
+          &lt;/select>&#xd;
+        &lt;/dd>&#xd;
+     &lt;/dl>&#xd;
+  &lt;/div> &#xd;
+  &lt;br />&#xd;
+  &lt;div class="buttonwrapper">&#xd;
+  &lt;input type="submit" value="$msg.get('weeklyActivity.sheet_submit_button')" class="button" />&#xd;
+  &lt;/div>&#xd;
+  &lt;/form>&#xd;
+  &lt;br />&#xd;
+  &lt;h3>$msg.get('weeklyActivity.sheet_select_date') :&lt;/h3>&#xd;
+  &lt;form action="" method="POST">&#xd;
+  &lt;div>&#xd;
+    &lt;dl>&#xd;
+      &lt;dt>$msg.get('weeklyActivity.sheet_satis_user')&lt;/dt>&#xd;
+        &lt;dd>&#xd;
+          &lt;input name="userInput" id="userInput" value="" type="text"/>&#xd;
+        &lt;/dd>&#xd;
+      &lt;dt>&lt;label>$msg.get('weeklyActivity.sheet_satis_use_date') &lt;input type="checkbox" class="check">&lt;/label>&lt;/dt>&#xd;
+      &lt;div class="show_date">&#xd;
+      &lt;dt>$msg.get('weeklyActivity.sheet_satis_start_date')&lt;/dt>&#xd;
+        &lt;dd>&#xd;
+          #set ($format = 'dd/MM/yyyy')&#xd;
+          #set ($value = $datetool.date)&#xd;
+          &lt;input type="text" name="startdate" value=""&#xd;
+             class="datetime t$!value.time" title="$!escapetool.xml($format)" />&#xd;
+        &lt;/dd>&#xd;
+      &lt;dt>$msg.get('weeklyActivity.sheet_satis_end_date')&lt;/dt>&#xd;
+        &lt;dd>&#xd;
+          #set ($format = 'dd/MM/yyyy')&#xd;
+          #set ($value = $datetool.date)&#xd;
+          &lt;input type="text" name="enddate" value=""&#xd;
+             class="datetime t$!value.time" title="$!escapetool.xml($format)" />&#xd;
+        &lt;/dd>&#xd;
+     &lt;/div>&#xd;
+    &lt;/dl>&#xd;
+  &lt;/div>&#xd;
+  &lt;br />&lt;br />&#xd;
+  &lt;div class="buttonwrapper">&#xd;
+  &lt;input type="submit" value="$msg.get('weeklyActivity.sheet_submit_button')" class="button" />&#xd;
+  &lt;/div>&#xd;
+  &lt;/form>&#xd;
+  {{/html}}&#xd;
+  &#xd;
+#end&#xd;
+&#xd;
+{{/velocity}}</content>
+</xwikidoc>

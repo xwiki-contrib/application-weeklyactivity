@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!--
  * See the NOTICE file distributed with this work for additional
  * information regarding copyright ownership.
@@ -20,63 +19,25 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
 -->
 
-<xwikidoc>
+<xwikidoc version="1.1">
   <web>WeeklyActivityCode</web>
   <name>Translations</name>
   <language/>
   <defaultLanguage/>
   <translation>0</translation>
-  <parent>WebHome</parent>
   <creator>xwiki:XWiki.Admin</creator>
-  <author>xwiki:XWiki.Admin</author>
-  <customClass/>
-  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
   <creationDate>1408609535000</creationDate>
-  <date>1408625061000</date>
-  <contentUpdateDate>1408625061000</contentUpdateDate>
+  <parent>WeeklyActivityCode.WebHome</parent>
+  <author>xwiki:XWiki.Admin</author>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <date>1412159648000</date>
+  <contentUpdateDate>1411136119000</contentUpdateDate>
   <version>1.1</version>
-  <title/>
-  <defaultTemplate/>
-  <validationScript/>
+  <title>Translations</title>
   <comment/>
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.0</syntaxId>
   <hidden>true</hidden>
-  <object>
-    <class>
-      <name>XWiki.TranslationDocumentClass</name>
-      <customClass/>
-      <customMapping/>
-      <defaultViewSheet/>
-      <defaultEditSheet/>
-      <defaultWeb/>
-      <nameField/>
-      <validationScript/>
-      <scope>
-        <cache>0</cache>
-        <disabled>0</disabled>
-        <displayType>select</displayType>
-        <multiSelect>0</multiSelect>
-        <name>scope</name>
-        <number>1</number>
-        <prettyName>Scope</prettyName>
-        <relationalStorage>0</relationalStorage>
-        <separator> </separator>
-        <separators> ,|</separators>
-        <size>1</size>
-        <unmodifiable>0</unmodifiable>
-        <values>GLOBAL|WIKI|USER|ON_DEMAND</values>
-        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
-      </scope>
-    </class>
-    <name>WeeklyActivityCode.Translations</name>
-    <number>0</number>
-    <className>XWiki.TranslationDocumentClass</className>
-    <guid>99eedae5-88c3-419c-a315-fc7badcc125b</guid>
-    <property>
-      <scope>WIKI</scope>
-    </property>
-  </object>
   <content>## Creation form
 weeklyActivity.create.startDate.label=Next start date
 weeklyActivity.create.startDate.hint=Start date of the next activity week
@@ -156,11 +117,54 @@ weeklyActivity.sheet.installProject=Please install "Project Management Applicati
 weeklyActivity.sheet.updatedone.button=Update done from planned activity
 weeklyActivity.sheet.editdone.button=Edit done activity
 weeklyActivity.sheet.editplanned.button=Edit planned activity
-weeklyActivity.sheet_show_stats=Show satisfactions statistics
+weeklyActivity.sheet_show_stats=Show satisfaction statistics
 ##Satisfaction Stats
 weeklyActivity.sheet_satisfaction_result=Satisfaction results
 weeklyActivity.sheet_total_vote=Total votes of project
-weeklyActivity.sheet_select_project=Please select your project
+weeklyActivity.sheet_select_project=Show satisfaction by project
+weeklyActivity.sheet_select_date=Show satisfaction per user and date
 weeklyActivity.sheet_submit_button=Submit
-weeklyActivity.sheet.confirm.button=Warning: this action will delete any existing data in done activity for the current week. Do you want to continue?</content>
+weeklyActivity.sheet.confirm.button=Warning: this action will delete any existing data in done activity for the current week. Do you want to continue?
+weeklyActivity.sheet_satis_user=Username
+weeklyActivity.sheet_satis_start_date=Start date
+weeklyActivity.sheet_satis_end_date=End date
+weeklyActivity.sheet_satis_project=Project
+weeklyActivity.sheet_satisfaction_result_avg=Satisfaction results average
+weeklyActivity.sheet_satisfaction_result_avg_on=Average on {0} projects
+weeklyActivity.sheet_satis_use_date=Date filter ?</content>
+  <object>
+    <name>WeeklyActivityCode.Translations</name>
+    <number>0</number>
+    <className>XWiki.TranslationDocumentClass</className>
+    <guid>99eedae5-88c3-419c-a315-fc7badcc125b</guid>
+    <class>
+      <name>XWiki.TranslationDocumentClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <scope>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>scope</name>
+        <number>1</number>
+        <prettyName>Scope</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators> ,|</separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>GLOBAL|WIKI|USER|ON_DEMAND</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </scope>
+    </class>
+    <property>
+      <scope>WIKI</scope>
+    </property>
+  </object>
 </xwikidoc>

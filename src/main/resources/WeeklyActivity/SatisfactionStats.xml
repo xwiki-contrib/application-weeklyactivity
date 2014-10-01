@@ -1,18 +1,38 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-->
+
 <xwikidoc version="1.1">
   <web>WeeklyActivity</web>
   <name>SatisfactionStats</name>
   <language/>
   <defaultLanguage/>
   <translation>0</translation>
-  <creator>XWiki.Admin</creator>
+  <creator>xwiki:XWiki.Admin</creator>
   <creationDate>1411553398000</creationDate>
   <parent>WeeklyActivity.WebHome</parent>
-  <author>XWiki.Admin</author>
-  <contentAuthor>XWiki.Admin</contentAuthor>
+  <author>xwiki:XWiki.Admin</author>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
   <date>1412157160000</date>
   <contentUpdateDate>1412156392000</contentUpdateDate>
-  <version>4.1</version>
+  <version>1.1</version>
   <title>Satisfaction Stats</title>
   <comment/>
   <minorEdit>false</minorEdit>
@@ -99,18 +119,18 @@
       <cache>long</cache>
     </property>
     <property>
-      <code>(function(){&#xd;
- document.observe('dom:loaded', function () {&#xd;
-   if($('userInput')) {&#xd;
-      Event.observe($('userInput'), "focus", function() {&#xd;
-       new XWiki.widgets.UserPicker(this, {&#xd;
-script: '$xwiki.getURL("${doc.fullName}", "view")?xpage=uorgsuggest&amp;uorg=user&amp;',&#xd;
-noresults: "$services.localization.render('core.widgets.userPicker.noResults')"&#xd;
-});&#xd;
-      &#xd;
-      });&#xd;
-    }&#xd;
-  }); // end of doc observe&#xd;
+      <code>(function(){
+ document.observe('dom:loaded', function () {
+   if($('userInput')) {
+      Event.observe($('userInput'), "focus", function() {
+       new XWiki.widgets.UserPicker(this, {
+script: '$xwiki.getURL("${doc.fullName}", "view")?xpage=uorgsuggest&amp;uorg=user&amp;',
+noresults: "$services.localization.render('core.widgets.userPicker.noResults')"
+});
+      
+      });
+    }
+  }); // end of doc observe
 })();</code>
     </property>
     <property>
@@ -203,16 +223,16 @@ noresults: "$services.localization.render('core.widgets.userPicker.noResults')"&
       <cache>long</cache>
     </property>
     <property>
-      <code>require(['jquery'], function ($) {&#xd;
-$(document).ready(function(){&#xd;
-    $('.check').change(function(){&#xd;
-        if(this.checked)&#xd;
-            $('.show_date').fadeIn('slow');&#xd;
-        else&#xd;
-            $('.show_date').fadeOut('slow');&#xd;
-&#xd;
-    });&#xd;
-});&#xd;
+      <code>require(['jquery'], function ($) {
+$(document).ready(function(){
+    $('.check').change(function(){
+        if(this.checked)
+            $('.show_date').fadeIn('slow');
+        else
+            $('.show_date').fadeOut('slow');
+
+    });
+});
 });</code>
     </property>
     <property>
@@ -305,41 +325,41 @@ $(document).ready(function(){&#xd;
       <cache>long</cache>
     </property>
     <property>
-      <code>.satisfaction_project {&#xd;
- display: inline-block;&#xd;
- width: 230px;&#xd;
- margin: 0 20px 20px 0;&#xd;
- padding: 25px 10px;&#xd;
- text-align: center;&#xd;
- background-color: #F5F5F5;&#xd;
-}&#xd;
-&#xd;
-.satisfaction_project h2 {&#xd;
- margin: 0;&#xd;
- margin-bottom: 5px;&#xd;
- border-bottom: 0;&#xd;
-}&#xd;
-&#xd;
-.satisfaction_project p img {&#xd;
- width: 125px;&#xd;
-}&#xd;
-&#xd;
-.satisfaction_header {&#xd;
-  margin-bottom: 30px;&#xd;
-}&#xd;
-&#xd;
-.satisfaction_header p {&#xd;
-  display: inline-block;&#xd;
-  margin-right: 70px;&#xd;
-}&#xd;
-&#xd;
-.show_date {&#xd;
-  display:none;&#xd;
-}&#xd;
+      <code>.satisfaction_project {
+ display: inline-block;
+ width: 230px;
+ margin: 0 20px 20px 0;
+ padding: 25px 10px;
+ text-align: center;
+ background-color: #F5F5F5;
+}
+
+.satisfaction_project h2 {
+ margin: 0;
+ margin-bottom: 5px;
+ border-bottom: 0;
+}
+
+.satisfaction_project p img {
+ width: 125px;
+}
+
+.satisfaction_header {
+  margin-bottom: 30px;
+}
+
+.satisfaction_header p {
+  display: inline-block;
+  margin-right: 70px;
+}
+
+.show_date {
+  display:none;
+}
 </code>
     </property>
     <property>
-      <name></name>
+      <name/>
     </property>
     <property>
       <parse/>

@@ -30,9 +30,9 @@
   <author>xwiki:XWiki.Admin</author>
   <customClass/>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <creationDate>1408609534000</creationDate>
-  <date>1411486143000</date>
-  <contentUpdateDate>1411486143000</contentUpdateDate>
+  <creationDate>1412241857000</creationDate>
+  <date>1412691543000</date>
+  <contentUpdateDate>1412691543000</contentUpdateDate>
   <version>1.1</version>
   <title>Macros</title>
   <defaultTemplate/>
@@ -44,9 +44,9 @@
   <attachment>
     <filename>10.png</filename>
     <filesize>56841</filesize>
-    <author>XWiki.Admin</author>
-    <date>1411486063000</date>
-    <version>1.1</version>
+    <author>xwiki:XWiki.aroger</author>
+    <date>1412241857000</date>
+    <version>1.2</version>
     <comment/>
     <content>iVBORw0KGgoAAAANSUhEUgAAAPoAAAEfCAYAAABoEtu4AAAACXBIWXMAAAsTAAALEwEAmpwYAAAK
 T2lDQ1BQaG90b3Nob3AgSUNDIHByb2ZpbGUAAHjanVNnVFPpFj333vRCS4iAlEtvUhUIIFJCi4AU
@@ -1051,9 +1051,9 @@ AAAAAElFTkSuQmCC
   <attachment>
     <filename>2.png</filename>
     <filesize>27526</filesize>
-    <author>XWiki.Admin</author>
-    <date>1411486062000</date>
-    <version>1.1</version>
+    <author>xwiki:XWiki.aroger</author>
+    <date>1412241857000</date>
+    <version>1.2</version>
     <comment/>
     <content>iVBORw0KGgoAAAANSUhEUgAAAPoAAAEfCAYAAABoEtu4AAAACXBIWXMAAAsTAAALEwEAmpwYAAAK
 T2lDQ1BQaG90b3Nob3AgSUNDIHByb2ZpbGUAAHjanVNnVFPpFj333vRCS4iAlEtvUhUIIFJCi4AU
@@ -1543,9 +1543,9 @@ MKEzGAwmdAaDwYTOYDCY0BkMBhM6g8GEzmAwahT/HwBLKlMlwhc3MAAAAABJRU5ErkJggg==
   <attachment>
     <filename>5.png</filename>
     <filesize>5739</filesize>
-    <author>XWiki.Admin</author>
-    <date>1411486062000</date>
-    <version>1.1</version>
+    <author>xwiki:XWiki.aroger</author>
+    <date>1412241857000</date>
+    <version>1.2</version>
     <comment/>
     <content>iVBORw0KGgoAAAANSUhEUgAAAPoAAAEfCAYAAABoEtu4AAAACXBIWXMAAAsTAAALEwEAmpwYAAAK
 T2lDQ1BQaG90b3Nob3AgSUNDIHByb2ZpbGUAAHjanVNnVFPpFj333vRCS4iAlEtvUhUIIFJCi4AU
@@ -1653,9 +1653,9 @@ ogMgOgCiAyA6AKIDRAfQDv8OAMaKyasL94/JAAAAAElFTkSuQmCC
   <attachment>
     <filename>6.png</filename>
     <filesize>13003</filesize>
-    <author>XWiki.Admin</author>
-    <date>1411486062000</date>
-    <version>1.1</version>
+    <author>xwiki:XWiki.aroger</author>
+    <date>1412241857000</date>
+    <version>1.2</version>
     <comment/>
     <content>iVBORw0KGgoAAAANSUhEUgAAAPoAAAEfCAYAAABoEtu4AAAACXBIWXMAAAsTAAALEwEAmpwYAAAK
 T2lDQ1BQaG90b3Nob3AgSUNDIHByb2ZpbGUAAHjanVNnVFPpFj333vRCS4iAlEtvUhUIIFJCi4AU
@@ -1891,9 +1891,9 @@ RU5ErkJggg==
   <attachment>
     <filename>8.png</filename>
     <filesize>6578</filesize>
-    <author>XWiki.Admin</author>
-    <date>1411486063000</date>
-    <version>1.1</version>
+    <author>xwiki:XWiki.aroger</author>
+    <date>1412241857000</date>
+    <version>1.2</version>
     <comment/>
     <content>iVBORw0KGgoAAAANSUhEUgAAAPoAAAEfCAYAAABoEtu4AAAACXBIWXMAAAsTAAALEwEAmpwYAAAK
 T2lDQ1BQaG90b3Nob3AgSUNDIHByb2ZpbGUAAHjanVNnVFPpFj333vRCS4iAlEtvUhUIIFJCi4AU
@@ -2119,7 +2119,11 @@ EB0AEB0A0QEA0QEA0QEA0QEA0QEA0QEA0QEA0QEQHQAQHQAQHQAQHQAQHQAQHQAQHQAQHQDRASBt
     {{html}}
       #set($objClassName = $!activityClassMap.get("$!type"))
       #set($objAddRedirectURL = $doc.getURL('edit', "tab=$!{type}&amp;editor=inline"))
-      #set($objAddURL = $doc.getURL('edit', "xpage=editobject&amp;xaction=addObject&amp;className=${objClassName}&amp;xredirect=${objAddRedirectURL}"))
+      #if ($type == "done")
+        #set($objAddURL = $doc.getURL('edit', "userpresets=1"))
+      #else
+        #set($objAddURL = $doc.getURL('edit', "xpage=editobject&amp;xaction=addObject&amp;className=${objClassName}&amp;xredirect=${objAddRedirectURL}"))
+      #end
       &lt;br /&gt;
         &lt;div class="buttonwrapper"&gt;
           &lt;a href="$objAddURL" class="button"&gt;$msg.get("weeklyActivity.sheet.add_type.$type")&lt;/a&gt;
@@ -2128,6 +2132,23 @@ EB0AEB0A0QEA0QEA0QEA0QEA0QEA0QEA0QEA0QEQHQAQHQAQHQAQHQAQHQAQHQAQHQAQHQDRASBt
       &lt;br /&gt;&lt;br /&gt;
     {{/html}}
   #end
+#end
+
+##
+## Add Done Activity Objects with user presets
+## -------------------------------------------
+#macro(addDoneObjectWithUserPresets $usertype)
+  #set($activityDoc = $xwiki.getDocument($doc.getFullName()))
+  #set($activityObj =  $activityDoc.newObject('WeeklyActivityCode.DoneActivityClass'))
+  #set($username = $xcontext.getUserReference())
+  #set($username = "$username")
+  #set($mydoc = $xwiki.getDocument($username))
+  #if("$!{usertype}" != "")
+    #set($discard = $activityObj.set('userType', $usertype))
+    #set($discard = $activityObj.set('user', $username))
+  #end
+  #set($discard = $activityDoc.save())
+  #$response.sendRedirect($xwiki.getURL($doc.getFullName(), 'edit', "tab=done"))
 #end
 
 ##
@@ -2236,9 +2257,15 @@ EB0AEB0A0QEA0QEA0QEA0QEA0QEA0QEA0QEA0QEQHQAQHQAQHQAQHQAQHQAQHQAQHQAQHQDRASBt
           #end
         #elseif($activityClassMap.keySet().contains("$!type") &amp;&amp; "$!prop.name" == 'userType')
           #if($xwiki.exists('ProjectsCode.SalesOrderClass'))
-            {{/html}}
-            $activityDoc.display($prop.name, "edit", $obj)
-            {{html clean="false"}}
+            #if ($request.getParameter("tab") == 'done' &amp;&amp; $xcontext.action == "edit")
+              {{/html}}
+                $activityDoc.display($prop.name, "edit", $obj)
+              {{html clean="false"}}
+            #else
+              {{/html}}
+                $activityDoc.display($prop.name, "edit", $obj)
+              {{html clean="false"}}
+            #end
           #else
             $activityDoc.displayHidden($prop, "${escapetool.xml($class.name)}_${obj.number}_", $obj)
             $services.localization.render('weeklyActivity.sheet.installProject')

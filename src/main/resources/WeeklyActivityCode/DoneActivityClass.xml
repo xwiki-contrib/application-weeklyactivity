@@ -1,39 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!--
- * See the NOTICE file distributed with this work for additional
- * information regarding copyright ownership.
- *
- * This is free software; you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as
- * published by the Free Software Foundation; either version 2.1 of
- * the License, or (at your option) any later version.
- *
- * This software is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public
- * License along with this software; if not, write to the Free
- * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
- * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
--->
-
 <xwikidoc>
   <web>WeeklyActivityCode</web>
   <name>DoneActivityClass</name>
   <language/>
-  <defaultLanguage/>
+  <defaultLanguage>en</defaultLanguage>
   <translation>0</translation>
   <parent>WeeklyActivityCode.WebHome</parent>
   <creator>xwiki:XWiki.Admin</creator>
   <author>xwiki:XWiki.Admin</author>
   <customClass/>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <creationDate>1408609535000</creationDate>
-  <date>1409238211000</date>
-  <contentUpdateDate>1409238211000</contentUpdateDate>
+  <creationDate>1388530800000</creationDate>
+  <date>1388530800000</date>
+  <contentUpdateDate>1388530800000</contentUpdateDate>
   <version>1.1</version>
   <title>DoneActivityClass</title>
   <defaultTemplate/>
@@ -271,23 +251,7 @@
     <userType>
       <cache>0</cache>
       <classname/>
-      <customDisplay>{{velocity}}
-#set ($propertyClass = $object.getxWikiClass().get($name))
-#set ($query = "select o.name, d.title from BaseObject o, XWikiDocument d where d.fullName=o.name and o.className='ProjectsCode.UserTypeClass' and d.fullName &lt;&gt; 'ProjectsCode.UserTypeTemplate' order by d.title asc")
-#set($results = $services.query.xwql($query).setLimit(10).execute())
-{{html}}
-
-&lt;select name="${prefix}${name}"&gt;
-&lt;option value="" selected="selected"&gt;&lt;/option&gt;
-#if ($type == 'edit')
-  #foreach($v in $results)
-    &lt;option value="${v.get(0)}" #if($value == $v.get(0))selected="selected"#end&gt;${v.get(1)}&lt;/option&gt;
-  #end
-#end
-&lt;/select&gt;
-{{/html}}
-
-{{/velocity}}</customDisplay>
+      <customDisplay>{{include reference="WeeklyActivityCode.UserTypeDisplayer" context="new"/}}</customDisplay>
       <disabled>0</disabled>
       <displayType>select</displayType>
       <idField/>
@@ -309,5 +273,6 @@
       <classType>com.xpn.xwiki.objects.classes.DBListClass</classType>
     </userType>
   </class>
-  <content/>
+  <content>
+</content>
 </xwikidoc>

@@ -1,23 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
- * See the NOTICE file distributed with this work for additional
- * information regarding copyright ownership.
- *
- * This is free software; you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as
- * published by the Free Software Foundation; either version 2.1 of
- * the License, or (at your option) any later version.
- *
- * This software is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public
- * License along with this software; if not, write to the Free
- * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
- * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
--->
 
 <xwikidoc>
   <web>WeeklyActivityCode</web>
@@ -30,9 +11,9 @@
   <author>xwiki:XWiki.Admin</author>
   <customClass/>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <creationDate>1412241857000</creationDate>
-  <date>1412691543000</date>
-  <contentUpdateDate>1412691543000</contentUpdateDate>
+  <creationDate>1415113442000</creationDate>
+  <date>1415113442000</date>
+  <contentUpdateDate>1415113442000</contentUpdateDate>
   <version>1.1</version>
   <title>Macros</title>
   <defaultTemplate/>
@@ -45,8 +26,8 @@
     <filename>10.png</filename>
     <filesize>56841</filesize>
     <author>xwiki:XWiki.aroger</author>
-    <date>1412241857000</date>
-    <version>1.2</version>
+    <date>1415113442000</date>
+    <version>1.1</version>
     <comment/>
     <content>iVBORw0KGgoAAAANSUhEUgAAAPoAAAEfCAYAAABoEtu4AAAACXBIWXMAAAsTAAALEwEAmpwYAAAK
 T2lDQ1BQaG90b3Nob3AgSUNDIHByb2ZpbGUAAHjanVNnVFPpFj333vRCS4iAlEtvUhUIIFJCi4AU
@@ -1052,8 +1033,8 @@ AAAAAElFTkSuQmCC
     <filename>2.png</filename>
     <filesize>27526</filesize>
     <author>xwiki:XWiki.aroger</author>
-    <date>1412241857000</date>
-    <version>1.2</version>
+    <date>1415113442000</date>
+    <version>1.1</version>
     <comment/>
     <content>iVBORw0KGgoAAAANSUhEUgAAAPoAAAEfCAYAAABoEtu4AAAACXBIWXMAAAsTAAALEwEAmpwYAAAK
 T2lDQ1BQaG90b3Nob3AgSUNDIHByb2ZpbGUAAHjanVNnVFPpFj333vRCS4iAlEtvUhUIIFJCi4AU
@@ -1544,8 +1525,8 @@ MKEzGAwmdAaDwYTOYDCY0BkMBhM6g8GEzmAwahT/HwBLKlMlwhc3MAAAAABJRU5ErkJggg==
     <filename>5.png</filename>
     <filesize>5739</filesize>
     <author>xwiki:XWiki.aroger</author>
-    <date>1412241857000</date>
-    <version>1.2</version>
+    <date>1415113442000</date>
+    <version>1.1</version>
     <comment/>
     <content>iVBORw0KGgoAAAANSUhEUgAAAPoAAAEfCAYAAABoEtu4AAAACXBIWXMAAAsTAAALEwEAmpwYAAAK
 T2lDQ1BQaG90b3Nob3AgSUNDIHByb2ZpbGUAAHjanVNnVFPpFj333vRCS4iAlEtvUhUIIFJCi4AU
@@ -1654,8 +1635,8 @@ ogMgOgCiAyA6AKIDRAfQDv8OAMaKyasL94/JAAAAAElFTkSuQmCC
     <filename>6.png</filename>
     <filesize>13003</filesize>
     <author>xwiki:XWiki.aroger</author>
-    <date>1412241857000</date>
-    <version>1.2</version>
+    <date>1415113442000</date>
+    <version>1.1</version>
     <comment/>
     <content>iVBORw0KGgoAAAANSUhEUgAAAPoAAAEfCAYAAABoEtu4AAAACXBIWXMAAAsTAAALEwEAmpwYAAAK
 T2lDQ1BQaG90b3Nob3AgSUNDIHByb2ZpbGUAAHjanVNnVFPpFj333vRCS4iAlEtvUhUIIFJCi4AU
@@ -1892,8 +1873,8 @@ RU5ErkJggg==
     <filename>8.png</filename>
     <filesize>6578</filesize>
     <author>xwiki:XWiki.aroger</author>
-    <date>1412241857000</date>
-    <version>1.2</version>
+    <date>1415113442000</date>
+    <version>1.1</version>
     <comment/>
     <content>iVBORw0KGgoAAAANSUhEUgAAAPoAAAEfCAYAAABoEtu4AAAACXBIWXMAAAsTAAALEwEAmpwYAAAK
 T2lDQ1BQaG90b3Nob3AgSUNDIHByb2ZpbGUAAHjanVNnVFPpFj333vRCS4iAlEtvUhUIIFJCi4AU
@@ -2239,11 +2220,17 @@ EB0AEB0A0QEA0QEA0QEA0QEA0QEA0QEA0QEA0QEQHQAQHQAQHQAQHQAQHQAQHQAQHQAQHQDRASBt
             &lt;label for="xwiki-form-satisfaction-${obj.number}-${pCustomValue}"&gt;&lt;input type="radio" value="${pCustomValue}" name="${escapetool.xml($class.name)}_${obj.number}_satisfaction" id="xwiki-form-satisfaction-${obj.number}-${pCustomValue}" class="satisfaction_input" #if($satisfactionObjValues.contains($pCustomValue)) checked="checked" #end&gt;&lt;img src="$xwiki.getDocument('WeeklyActivityCode.Macros').getAttachmentURL("$satisfactionCustomDisplay.get($pCustomValue)")"  height="115px" width="100px"/&gt;&lt;/label&gt;
           #end
         #elseif($activityClassMap.keySet().contains("$!type") &amp;&amp; "$!prop.name" == 'project')
-          #set($pSuggestName = "${escapetool.xml($class.name)}_${obj.number}_${prop.name}")
+          #set($pSuggestName = "${escapetool.xml($class.name)}_${obj.number}_${prop.name}_suggest")
+          #set($pSuggestHiddenName = "${escapetool.xml($class.name)}_${obj.number}_${prop.name}")
           #set($pSuggestURL = $xwiki.getURL('WeeklyActivityCode.SuggestAjaxPJ', 'view', "xpage=plain&amp;outputSyntax=plain"))
           #set($pOnFocus = "new ajaxSuggest(this, {script:&amp;quot;${pSuggestURL}&amp;amp;&amp;quot;,varname:&amp;quot;input&amp;quot;})")
           #set($pValue = $!obj.getProperty('project').value)
-          &lt;input type="text" value="$!pValue" name="${pSuggestName}" id="${pSuggestName}" class="suggested" onfocus="${pOnFocus}" /&gt;
+          #set($projectTitle = $pValue)
+          #if($pValue != "" &amp;&amp; $xwiki.exists($pValue))
+              #set($projectTitle = $xwiki.getDocument($pValue).getTitle())            
+          #end
+          &lt;input type="text" value="$!projectTitle" name="${pSuggestName}" id="${pSuggestName}" class="suggested" onfocus="${pOnFocus}" /&gt;
+          &lt;input type="hidden" value="$!pValue" name="${pSuggestHiddenName}" id="${pSuggestHiddenName}"/&gt;
         #elseif($activityClassMap.keySet().contains("$!type") &amp;&amp; "$!prop.name" == 'salesOrder')
           #if($xwiki.exists('ProjectsCode.SalesOrderClass'))
             #set($pSuggestName = "${escapetool.xml($class.name)}_${obj.number}_${prop.name}_suggest")

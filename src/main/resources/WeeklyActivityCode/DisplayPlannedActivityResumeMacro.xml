@@ -26,23 +26,25 @@
   <language/>
   <defaultLanguage/>
   <translation>0</translation>
-  <parent>WebHome</parent>
   <creator>xwiki:XWiki.Admin</creator>
+  <creationDate>1342501445000</creationDate>
+  <parent>WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
-  <customClass/>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <creationDate>1408609535000</creationDate>
-  <date>1408621965000</date>
-  <contentUpdateDate>1408609535000</contentUpdateDate>
+  <date>1418120635000</date>
+  <contentUpdateDate>1417708863000</contentUpdateDate>
   <version>1.1</version>
   <title/>
-  <defaultTemplate/>
-  <validationScript/>
   <comment/>
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.0</syntaxId>
   <hidden>true</hidden>
+  <content/>
   <object>
+    <name>WeeklyActivityCode.DisplayPlannedActivityResumeMacro</name>
+    <number>0</number>
+    <className>XWiki.WikiMacroClass</className>
+    <guid>00237608-5f6b-4827-945c-c17cd1373699</guid>
     <class>
       <name>XWiki.WikiMacroClass</name>
       <customClass/>
@@ -85,7 +87,7 @@
         <separators>|</separators>
         <size>1</size>
         <unmodifiable>0</unmodifiable>
-        <values>Optional|Mandatory|No content</values>
+        <values>Mandatory|Optional|No content</values>
         <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
       </contentType>
       <defaultCategory>
@@ -152,17 +154,13 @@
         <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
       </visibility>
     </class>
-    <name>WeeklyActivityCode.DisplayPlannedActivityResumeMacro</name>
-    <number>0</number>
-    <className>XWiki.WikiMacroClass</className>
-    <guid>00237608-5f6b-4827-945c-c17cd1373699</guid>
     <property>
       <code>{{velocity}}
   (% class="activity-sheet-title" %)(((
     $msg.get("weeklyActivity.sheet.plannedActivity.resume.title")
   )))
   #set($tagMap = {'UserTypes.PM' : '#008000','UserTypes.Designer' : 'orange', 'UserTypes.Dev' : 'blue', 'UserTypes.Infra' : 'red', 'UserTypes.Tester' : 'red', 'UserTypes.Other' : 'purple'})
-  #set($plannedActivities = $xwiki.search("select user.value, project.value, type.value from XWikiDocument as doc , BaseObject as obj, LargeStringProperty user, StringProperty project, StringProperty type where obj.name=doc.fullName and obj.className = ? and doc.fullName = ? and obj.id=user.id.id and user.id.name = ? and obj.id=project.id.id and project.id.name = ? and obj.id=type.id.id and type.id.name = ? order by user.value asc, project.value asc", 0, 0, ['WeeklyActivityCode.PlannedActivityClass', $doc.fullName, 'user', 'project', 'userType']))
+  #set($plannedActivities = $xwiki.search("select user.value, project.value, type.value from XWikiDocument as doc , BaseObject as obj, StringProperty user, StringProperty project, StringProperty type where obj.name=doc.fullName and obj.className = ? and doc.fullName = ? and obj.id=user.id.id and user.id.name = ? and obj.id=project.id.id and project.id.name = ? and obj.id=type.id.id and type.id.name = ? order by user.value asc, project.value asc", 0, 0, ['WeeklyActivityCode.PlannedActivityClass', $doc.fullName, 'user', 'project', 'userType']))
   #set($user = '')
   #foreach($plannedActivity in $plannedActivities)
     #if($user != $plannedActivity.get(0))
@@ -213,5 +211,4 @@
       <visibility>Current Wiki</visibility>
     </property>
   </object>
-  <content/>
 </xwikidoc>
